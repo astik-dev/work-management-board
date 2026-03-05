@@ -8,7 +8,7 @@ type AddMemberAction = {
 	},
 }
 
-type RemoveMemberAction = {
+export type RemoveMemberAction = {
 	type: typeof REMOVE_MEMBER,
 	payload: number,
 }

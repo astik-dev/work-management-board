@@ -1,12 +1,12 @@
 import type { MembersAction } from "./membersActions";
 import { ADD_MEMBER, REMOVE_MEMBER } from "./membersTypes";
 
-type Member = {
+export type Member = {
 	id: number,
 	name: string,
 }
 
-const initialState: Member[] = [
+export const initialState: Member[] = [
 	{ name: "Liam Carter", id: 0 },
 	{ name: "Aria Bennett", id: 1 },
 	{ name: "Mateo Alvarez", id: 2 },
