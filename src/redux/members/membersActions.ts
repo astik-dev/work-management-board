@@ -1,6 +1,6 @@
 import { ADD_MEMBER, REMOVE_MEMBER } from "./membersTypes";
 
-export type AddMemberAction = {
+type AddMemberAction = {
 	type: typeof ADD_MEMBER,
 	payload: {
 		id: number,
@@ -8,7 +8,7 @@ export type AddMemberAction = {
 	},
 }
 
-export type RemoveMemberAction = {
+type RemoveMemberAction = {
 	type: typeof REMOVE_MEMBER,
 	payload: number,
 }
