@@ -1,8 +1,17 @@
-import { Button, IconButton, Input, Snackbar, Stack, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { AccountBox, Delete, InfoOutline, PersonAddAlt } from "@mui/icons-material";
 import { addMember, removeMember } from "../redux/members/membersActions";
 import { useState } from "react";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import Snackbar from "@mui/material/Snackbar";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function Members() {
 	
@@ -14,7 +23,8 @@ function Members() {
 
 	return (
 		<Stack direction="column" gap={2}>
-			<form
+			<Box
+				component="form"
 				onSubmit={event => {
 					event.preventDefault();
 					const newMemberNameTrimmed = newMemberName.trim();
@@ -23,49 +33,59 @@ function Members() {
 					setNewMemberName("");
 					setIsSnackbarOpen(true);
 				}}
+				sx={{ display: "flex", gap: 1 }}
 			>
-				<Input
-					value={newMemberName}
+				<TextField
+					size="small"
+					sx={{ flex: 1 }}
 					placeholder="Enter new member name"
+					value={newMemberName}
 					onChange={e => setNewMemberName(e.target.value)}
-					endDecorator={
-						<Button
-							startDecorator={<PersonAddAlt />}
-							disabled={newMemberName.trim() === ""}
-							type="submit"
-						>
-							Add
-						</Button>
-					}
 				/>
-			</form>
+				<Button
+					variant="contained"
+					sx={{ textTransform: "none" }}
+					startIcon={<PersonAddAltIcon />}
+					disabled={newMemberName.trim() === ""}
+					type="submit"
+				>
+					Add
+				</Button>
+			</Box>
 			{members.map(member => (
-				<Stack direction="row" alignItems="center" gap={1} key={member.id}>
-					<Typography
-						sx={{ flex: "1", overflowWrap: "anywhere" }}
-						startDecorator={<AccountBox />}
+				<Stack
+					direction="row"
+					alignItems="center"
+					spacing={1}
+					key={member.id}
+				>
+					<Avatar
+						sx={{ width: "32px", height: "32px", fontSize: "1.1rem" }}
 					>
-						{member.name}
-					</Typography>
+						{member.name[0]}
+					</Avatar>
+					<Typography sx={{ flex: "1" }}>{member.name}</Typography>
 					<IconButton
-						variant="outlined"
-						color="danger"
-						size="sm"
+						color="error"
+						size="small"
 						onClick={() => dispatch(removeMember(member.id))}
 					>
-						<Delete />
+						<DeleteIcon fontSize="small" />
 					</IconButton>
 				</Stack>
 			))}
 			<Snackbar
+				message={(
+					<Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+						<InfoOutlineIcon />
+						New member added successfully
+					</Box>
+				)}
 				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-				startDecorator={<InfoOutline />}
 				autoHideDuration={1200}
 				open={isSnackbarOpen}
 				onClose={() => setIsSnackbarOpen(false)}
-			>
-				New member added successfully
-			</Snackbar>
+			/>
 		</Stack>
 	);
 }
