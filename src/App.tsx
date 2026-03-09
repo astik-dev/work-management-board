@@ -1,6 +1,9 @@
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
-import { Tab, TabList, TabPanel, Tabs } from "@mui/material";
+import Tabs from '@mui/joy/Tabs';
+import TabList from '@mui/joy/TabList';
+import Tab from '@mui/joy/Tab';
+import TabPanel from '@mui/joy/TabPanel';
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Members from "./components/Members";

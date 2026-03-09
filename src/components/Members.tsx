@@ -1,6 +1,14 @@
-import { Button, IconButton, Input, Snackbar, Stack, Typography } from "@mui/material";
+import Button from "@mui/joy/Button";
+import IconButton from "@mui/joy/IconButton";
+import Input from "@mui/joy/Input";
+import Snackbar from "@mui/joy/Snackbar";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import DeleteIcon from "@mui/icons-material/Delete";
+import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { AccountBox, Delete, InfoOutline, PersonAddAlt } from "@mui/icons-material";
 import { addMember, removeMember } from "../redux/members/membersActions";
 import { useState } from "react";
 
@@ -30,7 +38,7 @@ function Members() {
 					onChange={e => setNewMemberName(e.target.value)}
 					endDecorator={
 						<Button
-							startDecorator={<PersonAddAlt />}
+							startDecorator={<PersonAddAltIcon />}
 							disabled={newMemberName.trim() === ""}
 							type="submit"
 						>
@@ -43,7 +51,7 @@ function Members() {
 				<Stack direction="row" alignItems="center" gap={1} key={member.id}>
 					<Typography
 						sx={{ flex: "1", overflowWrap: "anywhere" }}
-						startDecorator={<AccountBox />}
+						startDecorator={<AccountBoxIcon />}
 					>
 						{member.name}
 					</Typography>
@@ -53,13 +61,13 @@ function Members() {
 						size="sm"
 						onClick={() => dispatch(removeMember(member.id))}
 					>
-						<Delete />
+						<DeleteIcon />
 					</IconButton>
 				</Stack>
 			))}
 			<Snackbar
 				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-				startDecorator={<InfoOutline />}
+				startDecorator={<InfoOutlineIcon />}
 				autoHideDuration={1200}
 				open={isSnackbarOpen}
 				onClose={() => setIsSnackbarOpen(false)}
