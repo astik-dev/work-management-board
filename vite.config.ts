@@ -11,4 +11,9 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    alias: {
+      '@mui/material': path.resolve(__dirname, 'node_modules/@mui/joy'),
+    },
+  },
 })

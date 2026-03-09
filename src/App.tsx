@@ -1,41 +1,39 @@
-import CssBaseline from '@mui/material/CssBaseline';
+import { CssVarsProvider } from '@mui/joy/styles';
+import CssBaseline from '@mui/joy/CssBaseline';
+import { Tab, TabList, TabPanel, Tabs } from "@mui/material";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Members from "./components/Members";
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import Tab from '@mui/material/Tab';
-import TabPanel from '@mui/lab/TabPanel';
-import { useState } from 'react';
-import Box from '@mui/material/Box';
 
 function App() {
-
-	const [activeTab, setActiveTab] = useState(1);
-
 	return (
 		<Provider store={store}>
+			<CssVarsProvider>
 
-			<CssBaseline />
+				<CssBaseline />
 
-			<TabContext value={activeTab}>
-				<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-					<TabList
-						centered
-						onChange={(_, newValue: number) => setActiveTab(newValue)}
-					>
-						<Tab label="Tasks" />
-						<Tab label="Members" />
+				<Tabs
+					defaultValue={1}
+					sx={{
+						maxWidth: "1000px",
+						mx: "auto",
+						px: { xs: 1, sm: 2 },
+						py: 2,
+					}}
+				>
+					<TabList>
+						<Tab>Tasks</Tab>
+						<Tab>Members</Tab>
 					</TabList>
-				</Box>
-				<TabPanel value={0}>
+					<TabPanel value={0}>
 
-				</TabPanel>
-				<TabPanel value={1} sx={{ maxWidth: "500px", p: 2, mx: "auto" }}>
-					<Members />
-				</TabPanel>
-			</TabContext>
+					</TabPanel>
+					<TabPanel value={1} sx={{ px: { xs: 1, sm: 2 }, py: 2 }}>
+						<Members />
+					</TabPanel>
+				</Tabs>
 
+			</CssVarsProvider>
 		</Provider>
 	);
 }
