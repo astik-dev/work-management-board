@@ -24,10 +24,13 @@ function Tasks() {
 	const handleColumnSeparatorDragMove = (columnIndex: number) => {
 		return (movementFromStartX: number) => {
 			setColumnWidths(prev =>
-				prev.map((width, index) => index === columnIndex
-					? { ...width, current: width.beforeResize + movementFromStartX }
-					: width
-				)
+				prev.map((width, index) => {
+					const newCurrent =
+						Math.max(width.beforeResize + movementFromStartX, 100);
+					return index === columnIndex
+						? { ...width, current: newCurrent }
+						: width;
+				})
 			);
 		};
 	};
