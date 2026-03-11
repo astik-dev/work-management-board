@@ -8,18 +8,20 @@ function getClientX(
 }
 
 type ColumnSeparatorProps = {
+	onDragStart: (clientX: number) => any,
 	onDragMove: (movementFromStartX: number) => any,
-	onDragEnd: () => any,
 };
 
-function ColumnSeparator({ onDragMove, onDragEnd }: ColumnSeparatorProps) {
+function ColumnSeparator({ onDragStart, onDragMove }: ColumnSeparatorProps) {
 
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 
 	function handleDragStart(event: React.MouseEvent | React.TouchEvent) {
-		setStartX(getClientX(event));
+		const clientX = getClientX(event);
+		setStartX(clientX);
 		setIsDragging(true);
+		onDragStart(clientX);
 	}
 
 	useEffect(() => {
@@ -32,10 +34,7 @@ function ColumnSeparator({ onDragMove, onDragEnd }: ColumnSeparatorProps) {
 			onDragMove(getClientX(event) - startX);
 		};
 
-		const handleDragEnd = () => {
-			setIsDragging(false);
-			onDragEnd();
-		};
+		const handleDragEnd = () => setIsDragging(false);
 
 		window.addEventListener('mousemove', handleDragMove);
 		window.addEventListener('touchmove', handleDragMove, { passive: false });
