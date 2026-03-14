@@ -1,5 +1,5 @@
 import Box from "@mui/joy/Box";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function getClientX(
 	event: MouseEvent | TouchEvent | React.MouseEvent | React.TouchEvent
@@ -14,15 +14,34 @@ type ColumnSeparatorProps = {
 
 function ColumnSeparator({ onDragStart, onDragMove }: ColumnSeparatorProps) {
 
+	const boxRef = useRef<HTMLDivElement>(null);
+
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 
-	function handleDragStart(event: React.MouseEvent | React.TouchEvent) {
-		const clientX = getClientX(event);
-		setStartX(clientX);
-		setIsDragging(true);
-		onDragStart(clientX);
-	}
+	useEffect(() => {
+	
+		const handleDragStart = (event: MouseEvent | TouchEvent) => {
+			event.preventDefault();
+			const clientX = getClientX(event);
+			setStartX(clientX);
+			setIsDragging(true);
+			onDragStart(clientX);
+		}
+
+		const box = boxRef.current;
+		if (box) {
+			box.addEventListener("mousedown", handleDragStart);
+			box.addEventListener("touchstart", handleDragStart, { passive: false });
+		}
+
+		return () => {
+			if (box) {
+				box.removeEventListener("mousedown", handleDragStart);
+				box.removeEventListener("touchstart", handleDragStart);
+			}
+		};
+	}, []);
 
 	useEffect(() => {
 		if (!isDragging) return;
@@ -57,8 +76,7 @@ function ColumnSeparator({ onDragStart, onDragMove }: ColumnSeparatorProps) {
 
 	return (
 		<Box
-			onMouseDown={handleDragStart}
-			onTouchStart={handleDragStart}
+			ref={boxRef}
 			sx={{
 				position: "absolute",
 				top: "50%",
