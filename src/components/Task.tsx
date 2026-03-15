@@ -2,7 +2,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import { TASK_STATUSES, type Task as TaskType } from "../redux/tasks/tasksReducer";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { removeTask, updateTask } from "../redux/tasks/tasksActions";
-import { createElement } from "react";
+import { createElement, forwardRef } from "react";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import SignalCellularAlt1BarIcon from '@mui/icons-material/SignalCellularAlt1Bar';
 import SignalCellularAlt2BarIcon from '@mui/icons-material/SignalCellularAlt2Bar';
@@ -28,7 +28,10 @@ type TaskProps = {
 	id: TaskType["id"],
 }
 
-function Task({ sx = [], id }: TaskProps) {
+const Task = forwardRef((
+	{ sx = [], id }: TaskProps,
+	inputRef: React.ForwardedRef<HTMLInputElement>
+) => {
 
 	const task = useAppSelector(state => state.tasks.entities[id]);
 	const members = useAppSelector(state => state.members);
@@ -52,8 +55,17 @@ function Task({ sx = [], id }: TaskProps) {
 		>
 			<Input
 				value={task.title}
+				placeholder="Enter task title"
 				onChange={event => {
 					dispatch(updateTask({ id, title: event.target.value }));
+				}}
+				slotProps={{
+					input: {
+						ref: inputRef,
+						onKeyDown: event => {
+							if (event.key === "Enter") event.currentTarget.blur();
+						}
+					}
 				}}
 			/>
 			<Select
@@ -101,6 +113,6 @@ function Task({ sx = [], id }: TaskProps) {
 			</IconButton>
 		</Box>
 	);
-}
+});
 
 export default Task;

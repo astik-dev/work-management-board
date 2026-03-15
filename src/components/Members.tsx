@@ -21,7 +21,7 @@ function Members() {
 	const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
 	return (
-		<Stack direction="column" gap={2}>
+		<Stack spacing={2} sx={{ flex: "auto" }}>
 			<form
 				onSubmit={event => {
 					event.preventDefault();
@@ -47,24 +47,26 @@ function Members() {
 					}
 				/>
 			</form>
-			{members.map(member => (
-				<Stack direction="row" alignItems="center" gap={1} key={member.id}>
-					<Typography
-						sx={{ flex: "1", overflowWrap: "anywhere" }}
-						startDecorator={<AccountBoxIcon />}
-					>
-						{member.name}
-					</Typography>
-					<IconButton
-						variant="outlined"
-						color="danger"
-						size="sm"
-						onClick={() => dispatch(removeMember(member.id))}
-					>
-						<DeleteIcon />
-					</IconButton>
-				</Stack>
-			))}
+			<Stack spacing={2} sx={{ overflow: "hidden auto" }}>
+				{members.map(member => (
+					<Stack direction="row" alignItems="center" gap={1} key={member.id}>
+						<Typography
+							sx={{ flex: "1", overflowWrap: "anywhere" }}
+							startDecorator={<AccountBoxIcon />}
+						>
+							{member.name}
+						</Typography>
+						<IconButton
+							variant="outlined"
+							color="danger"
+							size="sm"
+							onClick={() => dispatch(removeMember(member.id))}
+						>
+							<DeleteIcon />
+						</IconButton>
+					</Stack>
+				))}
+			</Stack>
 			<Snackbar
 				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 				startDecorator={<InfoOutlineIcon />}
