@@ -14,6 +14,7 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import IconButton from "@mui/joy/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AssigneeSelect from "./AssigneeSelect";
 
 const PRIORITIES = [
 	{ title: "None", Icon: MoreHorizIcon },
@@ -34,7 +35,6 @@ const Task = forwardRef((
 ) => {
 
 	const task = useAppSelector(state => state.tasks.entities[id]);
-	const members = useAppSelector(state => state.members);
 	const dispatch = useAppDispatch();
 
 	return (
@@ -91,19 +91,15 @@ const Task = forwardRef((
 					<Option value={index} key={index}>{priority.title}</Option>
 				))}
 			</Select>
-			<Select
-				defaultValue={task.assignee?.id}
+			<AssigneeSelect
+				selectedAssigneeId={task.assignee}
 				onChange={(_, newValue) => {
 					dispatch(updateTask({
 						id,
-						assignee: members.find(m => m.id === newValue),
+						assignee: newValue ? newValue.id : null,
 					}));
 				}}
-			>
-				{members.map(member => (
-					<Option value={member.id} key={member.id}>{member.name}</Option>
-				))}
-			</Select>
+			/>
 			<IconButton
 				color="danger"
 				size="sm"

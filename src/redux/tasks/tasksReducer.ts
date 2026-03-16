@@ -1,6 +1,5 @@
 import type { RemoveMemberAction } from "../members/membersActions";
 import type { Member } from "../members/membersReducer";
-import { initialState as membersInitialState } from "../members/membersReducer";
 import { REMOVE_MEMBER } from "../members/membersTypes";
 import type { TasksAction } from "./tasksActions";
 import { ADD_TASK, REMOVE_TASK, UPDATE_TASK } from "./tasksTypes";
@@ -10,7 +9,7 @@ export type Task = {
 	title: string,
 	status: typeof TASK_STATUSES[number],
 	priority: 0 | 1 | 2 | 3 | 4,
-	assignee: Member | null,
+	assignee: Member["id"] | null,
 }
 
 type TasksState = {
@@ -37,14 +36,14 @@ const initialState: TasksState = {
 			title: "Implement login form",
 			status: "In Progress",
 			priority: 4,
-			assignee: membersInitialState[3],
+			assignee: 3,
 		},
 		2: {
 			id: 2,
 			title: "Fix header responsiveness",
 			status: "In Review",
 			priority: 3,
-			assignee: membersInitialState[1],
+			assignee: 1,
 		},
 		3: {
 			id: 3,
@@ -65,14 +64,14 @@ const initialState: TasksState = {
 			title: "Add error handling to forms",
 			status: "Ready for Review",
 			priority: 4,
-			assignee: membersInitialState[2],
+			assignee: 2,
 		},
 		6: {
 			id: 6,
 			title: "Update dependencies to latest versions",
 			status: "To Do",
 			priority: 0,
-			assignee: membersInitialState[0],
+			assignee: 0,
 		},
 	}
 };
@@ -114,7 +113,7 @@ export function tasksReducer(
 			const tasksWithRemovedAssignee: typeof state.entities = {};
 			state.ids.forEach(id => {
 				const task = state.entities[id];
-				if (task.assignee?.id === action.payload) {
+				if (task.assignee === action.payload) {
 					tasksWithRemovedAssignee[task.id] = {
 						...task,
 						assignee: null,
