@@ -16,7 +16,7 @@ function Tabs() {
 			value={activeTab}
 			onChange={(_, newValue) => setActiveTab(Number(newValue))}
 		>
-			<TabList>
+			<TabList sx={{ justifyContent: "center" }}>
 				<Tab>Tasks</Tab>
 				<Tab>Members</Tab>
 			</TabList>
