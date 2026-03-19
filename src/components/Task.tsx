@@ -3,11 +3,11 @@ import { TASK_STATUSES, type Task as TaskType } from "../redux/tasks/tasksReduce
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { removeTask, updateTask } from "../redux/tasks/tasksActions";
 import { createElement, forwardRef } from "react";
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import SignalCellularAlt1BarIcon from '@mui/icons-material/SignalCellularAlt1Bar';
-import SignalCellularAlt2BarIcon from '@mui/icons-material/SignalCellularAlt2Bar';
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
-import WarningIcon from '@mui/icons-material/Warning';
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import SignalCellularAlt1BarIcon from "@mui/icons-material/SignalCellularAlt1Bar";
+import SignalCellularAlt2BarIcon from "@mui/icons-material/SignalCellularAlt2Bar";
+import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
+import WarningIcon from "@mui/icons-material/Warning";
 import Box from "@mui/joy/Box";
 import Input from "@mui/joy/Input";
 import Select from "@mui/joy/Select";

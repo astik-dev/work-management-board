@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { addTask } from "../redux/tasks/tasksActions";
 import Stack from "@mui/joy/Stack";
 

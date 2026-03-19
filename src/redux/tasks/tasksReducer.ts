@@ -3,11 +3,11 @@ import type { Member } from "../members/membersReducer";
 import { REMOVE_MEMBER } from "../members/membersTypes";
 import type { TasksAction } from "./tasksActions";
 import { ADD_TASK, REMOVE_TASK, UPDATE_TASK } from "./tasksTypes";
-import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
-import StreamIcon from '@mui/icons-material/Stream';
-import DoneIcon from '@mui/icons-material/Done';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import SearchIcon from '@mui/icons-material/Search';
+import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
+import StreamIcon from "@mui/icons-material/Stream";
+import DoneIcon from "@mui/icons-material/Done";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import SearchIcon from "@mui/icons-material/Search";
 
 export type Task = {
 	id: number,

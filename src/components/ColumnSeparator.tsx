@@ -55,16 +55,16 @@ function ColumnSeparator({ onDragStart, onDragMove }: ColumnSeparatorProps) {
 
 		const handleDragEnd = () => setIsDragging(false);
 
-		window.addEventListener('mousemove', handleDragMove);
-		window.addEventListener('touchmove', handleDragMove, { passive: false });
-		window.addEventListener('mouseup', handleDragEnd);
-		window.addEventListener('touchend', handleDragEnd);
+		window.addEventListener("mousemove", handleDragMove);
+		window.addEventListener("touchmove", handleDragMove, { passive: false });
+		window.addEventListener("mouseup", handleDragEnd);
+		window.addEventListener("touchend", handleDragEnd);
 
 		return () => {
-			window.removeEventListener('mousemove', handleDragMove);
-			window.removeEventListener('touchmove', handleDragMove);
-			window.removeEventListener('mouseup', handleDragEnd);
-			window.removeEventListener('touchend', handleDragEnd);
+			window.removeEventListener("mousemove", handleDragMove);
+			window.removeEventListener("touchmove", handleDragMove);
+			window.removeEventListener("mouseup", handleDragEnd);
+			window.removeEventListener("touchend", handleDragEnd);
 			document.body.style.userSelect = "";
 		};
 	}, [isDragging]);
