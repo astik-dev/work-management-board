@@ -3,11 +3,16 @@ import type { Member } from "../members/membersReducer";
 import { REMOVE_MEMBER } from "../members/membersTypes";
 import type { TasksAction } from "./tasksActions";
 import { ADD_TASK, REMOVE_TASK, UPDATE_TASK } from "./tasksTypes";
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
+import StreamIcon from '@mui/icons-material/Stream';
+import DoneIcon from '@mui/icons-material/Done';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import SearchIcon from '@mui/icons-material/Search';
 
 export type Task = {
 	id: number,
 	title: string,
-	status: typeof TASK_STATUSES[number],
+	status: typeof TASK_STATUSES[number]["label"],
 	priority: 0 | 1 | 2 | 3 | 4,
 	assignee: Member["id"] | null,
 }
@@ -18,7 +23,11 @@ type TasksState = {
 };
 
 export const TASK_STATUSES = [
-	"To Do", "In Progress", "Ready for Review", "In Review", "Paused", "Completed"
+	{ label: "To Do", color: "neutral", icon: PanoramaFishEyeIcon },
+	{ label: "In Progress", color: "warning", icon: StreamIcon },
+	{ label: "Ready for Review", color: "danger", icon: DoneIcon },
+	{ label: "In Review", color: "primary", icon: SearchIcon },
+	{ label: "Completed", color: "success", icon: DoneAllIcon },
 ] as const;
 
 const initialState: TasksState = {
@@ -48,14 +57,14 @@ const initialState: TasksState = {
 		3: {
 			id: 3,
 			title: "Optimize image loading",
-			status: "Paused",
+			status: "Completed",
 			priority: 1,
 			assignee: null,
 		},
 		4: {
 			id: 4,
 			title: "Implement dark mode toggle",
-			status: "To Do",
+			status: "In Progress",
 			priority: 2,
 			assignee: null,
 		},

@@ -15,6 +15,7 @@ import Option from "@mui/joy/Option";
 import IconButton from "@mui/joy/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AssigneeSelect from "./AssigneeSelect";
+import Chip from "@mui/joy/Chip";
 
 const PRIORITIES = [
 	{ title: "None", Icon: MoreHorizIcon },
@@ -74,9 +75,26 @@ const Task = forwardRef((
 					if (newValue === null) return;
 					dispatch(updateTask({ id, status: newValue }));
 				}}
+				renderValue={option => {
+					if (!option) return null;
+					const status = TASK_STATUSES.find(s => s.label === option.value);
+					if (!status) throw new Error("status = undefined");
+					return (
+						<Chip
+							startDecorator={createElement(status.icon)}
+							color={status.color}
+						>
+							{option.value}
+						</Chip>
+					);
+				}}
 			>
-				{TASK_STATUSES.map(status => (
-					<Option value={status} key={status}>{status}</Option>
+				{TASK_STATUSES.map(({ label, color, icon }) => (
+					<Option value={label} key={label}>
+						<Chip startDecorator={createElement(icon)} color={color}>
+							{label}
+						</Chip>
+					</Option>
 				))}
 			</Select>
 			<Select
