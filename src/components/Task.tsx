@@ -70,7 +70,7 @@ const Task = forwardRef((
 				}}
 			/>
 			<Select
-				defaultValue={task.status}
+				value={task.status}
 				onChange={(_, newValue) => {
 					if (newValue === null) return;
 					dispatch(updateTask({ id, status: newValue }));
@@ -98,7 +98,7 @@ const Task = forwardRef((
 				))}
 			</Select>
 			<Select
-				defaultValue={task.priority}
+				value={task.priority}
 				onChange={(_, newValue) => {
 					if (newValue === null) return;
 					dispatch(updateTask({ id, priority: newValue }));
