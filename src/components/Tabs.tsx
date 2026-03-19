@@ -1,10 +1,12 @@
 import JoyTabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
-import Tab from '@mui/joy/Tab';
+import Tab, { tabClasses } from '@mui/joy/Tab';
 import TabPanel from '@mui/joy/TabPanel';
 import Members from "./Members";
 import Tasks from './Tasks';
 import { useState } from 'react';
+import MemberCountChip from "./MemberCountChip";
+import TaskCountChip from "./TaskCountChip";
 
 function Tabs() {
 
@@ -16,9 +18,28 @@ function Tabs() {
 			value={activeTab}
 			onChange={(_, newValue) => setActiveTab(Number(newValue))}
 		>
-			<TabList sx={{ justifyContent: "center" }}>
-				<Tab>Tasks</Tab>
-				<Tab>Members</Tab>
+			<TabList
+				sx={{
+					justifyContent: "center",
+					[`&& .${tabClasses.root}`]: {
+						bgcolor: "transparent",
+						"&:hover": {
+							bgcolor: "transparent",
+						},
+						[`&.${tabClasses.selected}`]: {
+							color: "primary.plainColor",
+						},
+					},
+				}}
+			>
+				<Tab indicatorInset>
+					Tasks
+					<TaskCountChip isActive={activeTab === 0} />
+				</Tab>
+				<Tab indicatorInset>
+					Members
+					<MemberCountChip isActive={activeTab === 1} />
+				</Tab>
 			</TabList>
 			<TabPanel
 				value={0}
