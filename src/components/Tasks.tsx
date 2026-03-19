@@ -51,7 +51,7 @@ function Tasks() {
 				const newWidth = +activeColumnWidthBeforeResize + movementFromStartX;
 				container.style.setProperty(
 					columnWidthCssVar(columnIndex),
-					Math.max(newWidth, 100) + "px"
+					Math.max(newWidth, 120) + "px"
 				);
 			}
 		};
