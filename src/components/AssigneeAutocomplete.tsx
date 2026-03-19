@@ -4,12 +4,14 @@ import type { Member } from "../redux/members/membersReducer";
 import Autocomplete, { type AutocompleteProps } from "@mui/joy/Autocomplete";
 import AutocompleteOption from "@mui/joy/AutocompleteOption";
 
-type AssigneeSelectType = {
+type AssigneeAutocompleteProps = {
 	selectedAssigneeId: Member["id"] | null,
 	onChange: AutocompleteProps<Member, false, false, false>["onChange"],
 };
 
-function AssigneeSelect({ selectedAssigneeId, onChange }: AssigneeSelectType) {
+function AssigneeAutocomplete(
+	{ selectedAssigneeId, onChange }: AssigneeAutocompleteProps
+) {
 
 	const members = useAppSelector(state => state.members);
 
@@ -37,4 +39,4 @@ function AssigneeSelect({ selectedAssigneeId, onChange }: AssigneeSelectType) {
 	);
 }
 
-export default AssigneeSelect;
+export default AssigneeAutocomplete;

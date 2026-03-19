@@ -14,7 +14,7 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import IconButton from "@mui/joy/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AssigneeSelect from "./AssigneeSelect";
+import AssigneeAutocomplete from "./AssigneeAutocomplete";
 import Chip from "@mui/joy/Chip";
 
 const PRIORITIES = [
@@ -121,7 +121,7 @@ const Task = forwardRef((
 					)
 				})}
 			</Select>
-			<AssigneeSelect
+			<AssigneeAutocomplete
 				selectedAssigneeId={task.assignee}
 				onChange={(_, newValue) => {
 					dispatch(updateTask({
