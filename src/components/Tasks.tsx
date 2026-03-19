@@ -11,7 +11,7 @@ import Stack from "@mui/joy/Stack";
 
 const TABLE_HEADERS = [ "Title", "Status", "Priority", "Assignee" ] as const;
 
-const INITIAL_COLUMN_WIDTHS = [ 350, 200, 200, 200 ] as const;
+const INITIAL_COLUMN_WIDTHS = [ 350, 200, 175, 225 ] as const;
 
 function columnWidthCssVar<T extends number>(columnIndex: T): `--column-width-${T}` {
 	return `--column-width-${columnIndex}`;
