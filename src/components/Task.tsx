@@ -18,11 +18,11 @@ import AssigneeSelect from "./AssigneeSelect";
 import Chip from "@mui/joy/Chip";
 
 const PRIORITIES = [
-	{ title: "None", Icon: MoreHorizIcon },
-	{ title: "Low", Icon: SignalCellularAlt1BarIcon },
-	{ title: "Medium", Icon: SignalCellularAlt2BarIcon },
-	{ title: "High", Icon: SignalCellularAltIcon },
-	{ title: "Urgent", Icon: WarningIcon },
+	{ title: "None", icon: MoreHorizIcon, color: null },
+	{ title: "Low", icon: SignalCellularAlt1BarIcon, color: "#4C77E9" },
+	{ title: "Medium", icon: SignalCellularAlt2BarIcon, color: "#D03AEB" },
+	{ title: "High", icon: SignalCellularAltIcon, color: "#4BBE62" },
+	{ title: "Urgent", icon: WarningIcon, color: "#CE2A30" },
 ] as const;
 
 type TaskProps = {
@@ -37,6 +37,8 @@ const Task = forwardRef((
 
 	const task = useAppSelector(state => state.tasks.entities[id]);
 	const dispatch = useAppDispatch();
+
+	const SelectedPriorityIcon = PRIORITIES[task.priority].icon;
 
 	return (
 		<Box
@@ -103,11 +105,21 @@ const Task = forwardRef((
 					if (newValue === null) return;
 					dispatch(updateTask({ id, priority: newValue }));
 				}}
-				startDecorator={createElement(PRIORITIES[task.priority].Icon)}
+				startDecorator={
+					<SelectedPriorityIcon
+						sx={{ color: PRIORITIES[task.priority].color }}
+					/>
+				}
 			>
-				{PRIORITIES.map((priority, index) => (
-					<Option value={index} key={index}>{priority.title}</Option>
-				))}
+				{PRIORITIES.map((priority, index) => {
+					const Icon = priority.icon;
+					return (
+						<Option value={index} key={index}>
+							<Icon sx={{ color: priority.color }} />
+							{priority.title}
+						</Option>
+					)
+				})}
 			</Select>
 			<AssigneeSelect
 				selectedAssigneeId={task.assignee}
