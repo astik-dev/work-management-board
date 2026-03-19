@@ -13,6 +13,8 @@ function AssigneeSelect({ selectedAssigneeId, onChange }: AssigneeSelectType) {
 
 	return (
 		<Autocomplete
+			autoHighlight
+			blurOnSelect
 			value={members.find(member => member.id === selectedAssigneeId) || null}
 			options={members}
 			openOnFocus={true}
