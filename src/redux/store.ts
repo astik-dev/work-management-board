@@ -1,14 +1,13 @@
-import { combineReducers, createStore } from "redux";
-import { membersReducer } from "./members/membersReducer";
-import { tasksReducer } from "./tasks/tasksReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import membersReducer from "./membersSlice";
+import tasksReducer from "./tasksSlice";
 
-const rootReducer = combineReducers({
-	members: membersReducer,
-	tasks: tasksReducer,
+export const store = configureStore({
+	reducer: {
+		members: membersReducer,
+		tasks: tasksReducer,
+	}
 });
 
-const store = createStore(rootReducer);
-
-export default store;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

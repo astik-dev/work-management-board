@@ -1,7 +1,12 @@
 import type { SxProps, Theme } from "@mui/material/styles";
-import { TASK_STATUSES, type Task as TaskType } from "../redux/tasks/tasksReducer";
+import {
+	TASK_STATUSES,
+	removeTask,
+	tasksSelectors,
+	updateTask,
+	type Task as TaskType
+} from "../redux/tasksSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { removeTask, updateTask } from "../redux/tasks/tasksActions";
 import { createElement, forwardRef } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SignalCellularAlt1BarIcon from "@mui/icons-material/SignalCellularAlt1Bar";
@@ -34,8 +39,8 @@ const Task = forwardRef((
 	{ sx = [], id }: TaskProps,
 	inputRef: React.ForwardedRef<HTMLInputElement>
 ) => {
-
-	const task = useAppSelector(state => state.tasks.entities[id]);
+	
+	const task = useAppSelector(state => tasksSelectors.selectById(state, id));
 	const dispatch = useAppDispatch();
 
 	const SelectedPriorityIcon = PRIORITIES[task.priority].icon;
@@ -59,9 +64,9 @@ const Task = forwardRef((
 			<Input
 				value={task.title}
 				placeholder="Enter task title"
-				onChange={event => {
-					dispatch(updateTask({ id, title: event.target.value }));
-				}}
+				onChange={event => dispatch(updateTask(
+					{ id, changes: { title: event.target.value } }
+				))}
 				slotProps={{
 					input: {
 						ref: inputRef,
@@ -75,7 +80,7 @@ const Task = forwardRef((
 				value={task.status}
 				onChange={(_, newValue) => {
 					if (newValue === null) return;
-					dispatch(updateTask({ id, status: newValue }));
+					dispatch(updateTask({ id, changes: { status: newValue } }));
 				}}
 				renderValue={option => {
 					if (!option) return null;
@@ -103,7 +108,7 @@ const Task = forwardRef((
 				value={task.priority}
 				onChange={(_, newValue) => {
 					if (newValue === null) return;
-					dispatch(updateTask({ id, priority: newValue }));
+					dispatch(updateTask({ id, changes: { priority: newValue } }));
 				}}
 				startDecorator={
 					<SelectedPriorityIcon
@@ -126,7 +131,7 @@ const Task = forwardRef((
 				onChange={(_, newValue) => {
 					dispatch(updateTask({
 						id,
-						assignee: newValue ? newValue.id : null,
+						changes: { assignee: newValue ? newValue.id : null },
 					}));
 				}}
 			/>

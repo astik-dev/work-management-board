@@ -2,8 +2,7 @@ import IconButton from "@mui/joy/IconButton";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { removeMember } from "../redux/members/membersActions";
-import type { Member as MemberType } from "../redux/members/membersReducer";
+import { removeMember, type Member as MemberType } from "../redux/membersSlice";
 import { useAppDispatch } from "../redux/hooks";
 import Avatar from "@mui/joy/Avatar";
 

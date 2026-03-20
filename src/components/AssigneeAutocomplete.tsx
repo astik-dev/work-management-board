@@ -1,6 +1,6 @@
 import Avatar from "@mui/joy/Avatar";
 import { useAppSelector } from "../redux/hooks";
-import type { Member } from "../redux/members/membersReducer";
+import type { Member } from "../redux/membersSlice";
 import Autocomplete, { type AutocompleteProps } from "@mui/joy/Autocomplete";
 import AutocompleteOption from "@mui/joy/AutocompleteOption";
 

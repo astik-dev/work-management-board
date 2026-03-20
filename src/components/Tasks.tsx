@@ -6,7 +6,7 @@ import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import AddIcon from "@mui/icons-material/Add";
-import { addTask } from "../redux/tasks/tasksActions";
+import { addTask, tasksSelectors } from "../redux/tasksSlice";
 import Stack from "@mui/joy/Stack";
 
 const TABLE_HEADERS = [ "Title", "Status", "Priority", "Assignee" ] as const;
@@ -30,7 +30,7 @@ function Tasks() {
 	const lastTaskInputRef = useRef<HTMLInputElement>(null);
 	const shouldFocusLastTaskInputRef = useRef<boolean>(false);
 
-	const taskIds = useAppSelector(state => state.tasks.ids);
+	const taskIds = useAppSelector(tasksSelectors.selectIds);
 	const dispatch = useAppDispatch();
 
 	const handleColumnSeparatorDragStart = (columnIndex: number) => () => {

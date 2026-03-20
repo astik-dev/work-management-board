@@ -5,7 +5,7 @@ import Stack from "@mui/joy/Stack";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { addMember } from "../redux/members/membersActions";
+import { addMember } from "../redux/membersSlice";
 import { useState } from "react";
 import Member from "./Member";
 
