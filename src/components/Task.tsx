@@ -35,11 +35,11 @@ const STATUSES = [
 ] as const;
 
 const PRIORITIES = [
-	{ title: "None", icon: MoreHorizIcon, color: null },
-	{ title: "Low", icon: SignalCellularAlt1BarIcon, color: "#4C77E9" },
-	{ title: "Medium", icon: SignalCellularAlt2BarIcon, color: "#D03AEB" },
-	{ title: "High", icon: SignalCellularAltIcon, color: "#4BBE62" },
-	{ title: "Urgent", icon: WarningIcon, color: "#CE2A30" },
+	{ label: "None", icon: MoreHorizIcon, color: null },
+	{ label: "Low", icon: SignalCellularAlt1BarIcon, color: "#4C77E9" },
+	{ label: "Medium", icon: SignalCellularAlt2BarIcon, color: "#D03AEB" },
+	{ label: "High", icon: SignalCellularAltIcon, color: "#4BBE62" },
+	{ label: "Urgent", icon: WarningIcon, color: "#CE2A30" },
 ] as const;
 
 type TaskProps = {
@@ -133,7 +133,7 @@ const Task = forwardRef((
 					return (
 						<Option value={index} key={index}>
 							<Icon sx={{ color: priority.color }} />
-							{priority.title}
+							{priority.label}
 						</Option>
 					)
 				})}
