@@ -1,6 +1,5 @@
 import type { SxProps, Theme } from "@mui/material/styles";
 import {
-	TASK_STATUSES,
 	removeTask,
 	tasksSelectors,
 	updateTask,
@@ -8,6 +7,11 @@ import {
 } from "../redux/tasksSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { createElement, forwardRef } from "react";
+import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
+import StreamIcon from "@mui/icons-material/Stream";
+import DoneIcon from "@mui/icons-material/Done";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SignalCellularAlt1BarIcon from "@mui/icons-material/SignalCellularAlt1Bar";
 import SignalCellularAlt2BarIcon from "@mui/icons-material/SignalCellularAlt2Bar";
@@ -21,6 +25,14 @@ import IconButton from "@mui/joy/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AssigneeAutocomplete from "./AssigneeAutocomplete";
 import Chip from "@mui/joy/Chip";
+
+const STATUSES = [
+	{ label: "To Do", icon: PanoramaFishEyeIcon, color: "neutral" },
+	{ label: "In Progress", icon: StreamIcon, color: "warning" },
+	{ label: "Ready for Review", icon: DoneIcon, color: "danger" },
+	{ label: "In Review", icon: SearchIcon, color: "primary" },
+	{ label: "Completed", icon: DoneAllIcon, color: "success" },
+] as const;
 
 const PRIORITIES = [
 	{ title: "None", icon: MoreHorizIcon, color: null },
@@ -84,7 +96,7 @@ const Task = forwardRef((
 				}}
 				renderValue={option => {
 					if (!option) return null;
-					const status = TASK_STATUSES.find(s => s.label === option.value);
+					const status = STATUSES.find(s => s.label === option.value);
 					if (!status) throw new Error("status = undefined");
 					return (
 						<Chip
@@ -96,7 +108,7 @@ const Task = forwardRef((
 					);
 				}}
 			>
-				{TASK_STATUSES.map(({ label, color, icon }) => (
+				{STATUSES.map(({ label, color, icon }) => (
 					<Option value={label} key={label}>
 						<Chip startDecorator={createElement(icon)} color={color}>
 							{label}
